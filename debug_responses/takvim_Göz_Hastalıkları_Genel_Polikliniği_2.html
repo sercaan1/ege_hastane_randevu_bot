@@ -1,0 +1,800 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head><title>
+	EÜTF e-Randevu Sistemi
+</title><link rel="icon" href="Images/favicon.png" type="image/gif" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><meta content="Ege Üniversitesi Tıp Fakültesi Hastanesi Hastane Bilgi Yönetim Sistemi" name="description" /><meta content="Ege Üniversitesi Tıp Fakültesi Bilgi İşlem Müdürlüğü" name="author" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
+
+    <style type="text/css">
+
+        .upProgress{
+            position: fixed; top:0; left:0;width:100%; height:100%;
+            background: rgba(0,0,0,0.75);
+            z-index:9999;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            font-size:20px;
+        }
+
+        .ustButonDiv{margin-top:2px!important; padding-left:2px!important; padding-right:2px!important}
+
+    </style>
+
+    <link rel="shortcut icon" href="img/iconified/favicon.ico" type="image/x-icon" /><link rel="apple-touch-icon" href="img/iconified/apple-touch-icon.png" /><link rel="apple-touch-icon" sizes="57x57" href="img/iconified/apple-touch-icon-57x57.png" /><link rel="apple-touch-icon" sizes="72x72" href="img/iconified/apple-touch-icon-72x72.png" /><link rel="apple-touch-icon" sizes="76x76" href="img/iconified/apple-touch-icon-76x76.png" /><link rel="apple-touch-icon" sizes="114x114" href="img/iconified/apple-touch-icon-114x114.png" /><link rel="apple-touch-icon" sizes="120x120" href="img/iconified/apple-touch-icon-120x120.png" /><link rel="apple-touch-icon" sizes="144x144" href="img/iconified/apple-touch-icon-144x144.png" /><link rel="apple-touch-icon" sizes="152x152" href="img/iconified/apple-touch-icon-152x152.png" /><link rel="apple-touch-icon" sizes="180x180" href="img/iconified/apple-touch-icon-180x180.png" />
+
+    <!-- Plugins css -->
+    
+    <link rel="stylesheet" href="assets/plugins/sweetalert2/dist/sweetalert2.min.css" /><link href="assets/plugins/notifications/notification.css" rel="stylesheet" /><link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/core.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.css" rel="stylesheet" type="text/css" /><link href="assets/css/components.css" rel="stylesheet" type="text/css" /><link href="assets/css/pages.css" rel="stylesheet" type="text/css" /><link href="assets/css/menu.css" rel="stylesheet" type="text/css" /><link href="assets/css/responsive.css" rel="stylesheet" type="text/css" /><link href="assets/css/project.css" rel="stylesheet" type="text/css" /><link href="assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css" /><link href="assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css" /><link href="/CDNHub/MoltranCDN/assets/css/jquery-ui.css" rel="stylesheet" /><link href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" /><link href="assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.css" rel="stylesheet" />
+
+    <script src="assets/js/modernizr.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <!--Custom Tagları arasındaki kodların düzenini bozmayınız. -->
+    <!--Custom-->
+    <!--jQuery-->
+    <script src="assets/js/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <script src="/CDNHub/MoltranCDN/assets/js/jquery-ui.js"></script>
+    
+    
+
+    <script src="assets/plugins/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="assets/plugins/sweetalert2/core.js"></script>    
+
+    <script src="assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="assets/js/jquery.inputmask.bundle.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".breadcrumb li.active").html($(document).find("title").text());
+
+            $('.datepick').datepicker({
+                format: 'dd.mm.yyyy',
+                autoclose: true,
+                todayBtn: true,
+                todayHighlight: true,
+                weekStart: 1,
+                language: "tr",
+                clearBtn: true,
+                showWeekDays: true        
+            });
+
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104753344-7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-104753344-7');
+    </script>
+
+
+
+    
+    
+    <!--Custom-->
+</head>
+<body class="fixed-left">
+    <form name="aspnetForm" method="post" action="./RandevuTakvim.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/Randevu/WebResource.axd?d=aCANKMzO7hhyIsvwsA7M87KDyAzz3JyGDVb3bWfjPlvC_TsMpxENa8CZkmuYFsVZLvTdwHbGLzu4rHHibyTlIVjMq8Fv3LyWkz5LhM-MzpA1&amp;t=637811839220000000" type="text/javascript"></script>
+
+
+<script src="/Randevu/ScriptResource.axd?d=3-VuhOuKM7_w7bRxewktp4GYTkN58at4mgmMiSJZJc-Y0x7YZJqRc5Ylv-sV59pb1wIKUBcQStGEqZwZBFbpOCMiQafQCHBnghAeslIcQ60sXWhsfZLFWIt2KtNNmQ6e9rX8DMBaz32UdTLdQrajng2&amp;t=135ac0e7" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/Randevu/ScriptResource.axd?d=QAwXfarNaBlgvV7ZTVVWDj0O3fb4kkgXFKne78UeAQJKA9lLzzy-bzuTGwFBWaw8-3eZimWIw0PLiQr95iB43xou3kWkesK8loPSIR5u3EYMnXGwmw-XHjQRawGJfRQc2ipBqlBMZBoPz7ZUEklp9A2&amp;t=135ac0e7" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5DFF09B6" />
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', ['tctl00$MainContent$upTarihler',''], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+
+        <input type="hidden" name="ctl00$mkMesaj$hdnMasterMessageLogla" id="ctl00_mkMesaj_hdnMasterMessageLogla" />
+<input type="hidden" name="ctl00$mkMesaj$hdnMasterMessageTur" id="ctl00_mkMesaj_hdnMasterMessageTur" />
+
+        <!-- Begin page -->
+
+        <div id="wrapper">
+
+            <div class="row" style="background-color: #293879">
+                <div class="text-center">
+                    <div class="col-lg-offset-2 col-lg-12">
+                        <div class="col-lg-1" style="height:80px; background-image:url(Images/egeMedLogo.png); background-position:center; background-repeat:no-repeat; background-size:70px"></div>
+                        <div class="col-lg-11" style="text-align: left" id="eu-baslik-text">
+                            <h3 style="color: #FFF">Ege Üniversitesi Tıp Fakültesi Hastanesi<br />E-Randevu Sistemi</h3>
+                        </div>
+                    </div>
+                </div>                                
+            </div>
+
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8">
+                    
+
+    <style>
+        .gunItem {
+            min-height: 243px;
+        }
+    </style>
+
+    <input name="ctl00$MainContent$hdnBirimKodu" type="hidden" id="ctl00_MainContent_hdnBirimKodu" value="270015" />
+    <input name="ctl00$MainContent$hdnAltBirimKodu" type="hidden" id="ctl00_MainContent_hdnAltBirimKodu" value="0" />
+    <input name="ctl00$MainContent$hdnTakvimGun" type="hidden" id="ctl00_MainContent_hdnTakvimGun" value="15" />
+    <input name="ctl00$MainContent$hdnCalismaTakvimiBelirlenmisMi" type="hidden" id="ctl00_MainContent_hdnCalismaTakvimiBelirlenmisMi" value="H" />
+
+    <div class="container">
+
+
+        <div class="row m-t-10">
+            <div class="col-lg">
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div>
+                                <div class="col-lg-6 col-sm-12 col-xs-12 ">
+                                    <span id="ctl00_MainContent_lblHastaIsim" style="font-size:14pt;font-weight:bold;">SERCAN KARAKUYU</span>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12 col-xs-12 text-right" id="eu-personel-aciklama">
+                                    <span id="ctl00_MainContent_lblPersonelAciklama" style="color:Red;font-size:14pt;font-weight:bold;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer" style="background-color: #E6E6E6">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-md-4 ustButonDiv">
+                                <button onclick="__doPostBack('ctl00$MainContent$btnRandevuDurumu','')" id="ctl00_MainContent_btnRandevuDurumu" type="button" class="btn btn-block btn-primary waves-effect waves-light"><i class="fa fa-h-square"></i><span>&nbsp;Birim Listesi</span></button>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4 ustButonDiv">
+                                <button onclick="__doPostBack('ctl00$MainContent$btnRandevularim','')" id="ctl00_MainContent_btnRandevularim" type="button" class="btn btn-block btn-primary waves-effect waves-light"><i class="fa fa-calendar"></i><span>&nbsp;Randevularım</span></button>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4 ustButonDiv">
+                                <button onclick="__doPostBack('ctl00$MainContent$btnTetkiklerim','')" id="ctl00_MainContent_btnTetkiklerim" type="button" class="btn btn-block btn-primary waves-effect waves-light" style="color: red"><i class="fa fa-flask"></i><span>&nbsp;Tetkiklerim</span></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="row">
+            <div class="col-lg">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading ">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span id="ctl00_MainContent_lblBasvurulacakBirimAdi" style="font-weight:bold;"><span style="font-size:16pt">Göz Hastalıkları Genel Polikliniği 2</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ctl00_MainContent_upTarihler">
+	
+
+                
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="panel panel-color panel-primary">
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    cuma     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">17</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl00$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl00_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    pazartesi
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">20</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl01$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl01_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    salı     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">21</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl02$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl02_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    çarşamba 
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">22</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl03$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl03_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    cuma     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">24</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl04$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl04_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    pazartesi
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">27</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl05$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl05_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    salı     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">28</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl06$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl06_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    çarşamba 
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">29</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl07$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl07_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    perşembe 
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">30</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Nisan  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl00$rpTakvim$ctl08$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl00_rpTakvim_ctl08_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="panel panel-color panel-primary">
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    pazartesi
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">04</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl00$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl00_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    salı     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">05</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl01$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl01_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    çarşamba 
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">06</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl02$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl02_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    perşembe 
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">07</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl03$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl03_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    cuma     
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">08</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl04$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl04_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                    <div class="gunItem col-xs-6 col-md-4 col-md-3 p-b-10">
+
+                                                        <div class="panel panel-fill panel-danger">
+
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title text-center p-0">
+                                                                    pazartesi
+                                                                </h3>
+                                                            </div>
+
+                                                            <div class="panel-body text-center p-t-0 p-b-10">
+                                                                <span style="display:block; color:#FFF!important; font-size:40pt!important; line-height:1;margin-top:10px;">11</span>
+                                                                <span style="display:block; color:#FFF!important; font-size:18pt!important; line-height:1;margin-bottom:5px;">Mayıs  </span>
+                                                                                                                            
+                                                            </div>
+
+                                                            <div class="panel-footer m-b-30 text-center" style="height:60px; background-color: #D76664">
+                                                        
+                                                                <span class="btn waves-effect waves-light" style="padding: 0px!important; background-color:#347550!important; color:white!important; display:none" ">
+		                                                            <input type="submit" name="ctl00$MainContent$rpDonem$ctl01$rpTakvim$ctl05$btnTalepEt" value="Talep Et" id="ctl00_MainContent_rpDonem_ctl01_rpTakvim_ctl05_btnTalepEt" style="background-color: transparent!important; border: none; width: 100%; height: 100%; padding: 5px 10px 5px 10px; font-size:14pt!important; letter-spacing:1.5px" />
+	                                                            </span>
+
+                                                                <h3 class="panel-title" style="display:block">DOLU</h3>
+
+                                                            </div>
+                                                    
+                                                        </div>
+
+                                                    </div>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+            
+</div>
+
+    </div>
+
+    <input type="hidden" name="ctl00$MainContent$mkMesaj$hdnMasterMessageLogla" id="ctl00_MainContent_mkMesaj_hdnMasterMessageLogla" />
+<input type="hidden" name="ctl00$MainContent$mkMesaj$hdnMasterMessageTur" id="ctl00_MainContent_mkMesaj_hdnMasterMessageTur" />
+
+
+
+                </div>
+            </div>
+
+            <div class="row m-t-10">
+                <div class="col-lg-12 text-center">
+                    <p style="color:#293879">E.Ü. Tıp Fakültesi Hastanesi / Başhekimlik Bilgi İşlem v.06042026.34</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- END wrapper -->
+
+        <div id="ctl00_upProgress" style="display:none;">
+	
+                <div class="upProgress">Lütfen bekleyiniz...</div>
+            
+</div>
+
+        
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":500,"dynamicLayout":true}, null, null, $get("ctl00_upProgress"));
+});
+//]]>
+</script>
+</form>
+
+    <script>
+        var resizefunc = [];
+    </script>
+
+    <!-- jQuery  -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/detect.js"></script>
+    <script src="assets/js/fastclick.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/jquery.blockUI.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.app.js"></script>
+    <script src="assets/plugins/notifyjs/dist/notify.min.js"></script>
+    <script src="assets/plugins/notifications/notify-metro.js"></script>
+    <script src="assets/plugins/notifications/notifications.js"></script>
+    <script src="assets/plugins/moment/moment.js"></script>
+    <script src="assets/plugins/select2/dist/js/select2.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js"></script>
+    <script src="assets/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7.1.0/dist/promise.min.js"></script>
+    <!-- jQuery  -->
+
+    <script>
+        // Select2
+        $(".select2").select2({
+            width: '100%'
+        });
+    </script>
+
+    
+
+</body>
+</html>
